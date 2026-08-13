@@ -6,6 +6,36 @@ runConfig:
   memoryMiB: 512
 
 env:
+  # Firebase 웹 설정은 공개 클라이언트 설정이며 Next.js 빌드 시 포함됩니다.
+  - variable: NEXT_PUBLIC_FIREBASE_API_KEY
+    value: AIzaSyAN_NDve9_iQdV8g_q0qsiIMkWGb0OhRbo
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+    value: companychatbot-d40f0.firebaseapp.com
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+    value: companychatbot-d40f0
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+    value: companychatbot-d40f0.firebasestorage.app
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_FIREBASE_APP_ID
+    value: 1:505660953299:web:c633d3a1c2fed6a9843a26
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: GOOGLE_CLOUD_PROJECT
+    value: companychatbot-d40f0
+    availability:
+      - RUNTIME
   - variable: GOOGLE_CLOUD_LOCATION
     value: global
     availability:
