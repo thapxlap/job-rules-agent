@@ -1,0 +1,31 @@
+{
+  "name": "ask-anything-firebase-mvp",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.12.4",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "functions:build": "pnpm --dir functions build",
+    "check": "pnpm typecheck && pnpm functions:build",
+    "admin:set": "tsx scripts/set-admin.ts"
+  },
+  "dependencies": {
+    "@google-cloud/firestore": "^7.11.3",
+    "@google/genai": "^1.30.0",
+    "firebase": "^12.0.0",
+    "firebase-admin": "^13.4.0",
+    "next": "^15.4.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.8.0"
+  }
+}

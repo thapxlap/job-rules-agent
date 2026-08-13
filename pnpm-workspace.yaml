@@ -1,0 +1,15 @@
+packages:
+  - functions
+
+onlyBuiltDependencies:
+  - "@firebase/util"
+  - "@google/genai"
+  - esbuild
+  - protobufjs
+  - sharp
+allowBuilds:
+  '@firebase/util': true
+  '@google/genai': true
+  esbuild: true
+  protobufjs: true
+  sharp: true

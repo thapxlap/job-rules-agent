@@ -1,0 +1,7 @@
+node_modules/
+.next/
+.firebase/
+.env.local
+functions/lib/
+*.log
+*.tsbuildinfo
