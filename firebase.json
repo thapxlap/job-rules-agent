@@ -9,7 +9,7 @@
     {
       "backendId": "job-rules-agent",
       "rootDir": ".",
-      "ignore": ["node_modules", ".next", ".git", "firebase-debug.log", "firebase-debug.*.log"]
+      "ignore": ["node_modules", ".next", ".git", "functions", "firebase-debug.log", "firebase-debug.*.log"]
     }
   ],
   "emulators": {
