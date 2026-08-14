@@ -1,7 +1,5 @@
 import { FieldPath } from "@google-cloud/firestore";
-import { visibilityKeysFor } from "@/lib/server/access";
 import { generateGroundedAnswer, embedText } from "@/lib/server/ai";
-import { AuthError, requireUser } from "@/lib/server/auth";
 import { serverDb } from "@/lib/server/firebase-admin";
 import type { ChatEvent, Source } from "@/lib/shared/types";
 
@@ -70,7 +68,6 @@ async function retrieve(question: string, scopes: string[]): Promise<ChunkResult
 
 export async function POST(request: Request) {
   try {
-    const user = await requireUser(request);
     const body = (await request.json()) as { question?: unknown };
     const question = typeof body.question === "string" ? body.question.trim() : "";
 
@@ -81,7 +78,8 @@ export async function POST(request: Request) {
       );
     }
 
-    const chunks = await retrieve(question, visibilityKeysFor(user));
+    // This MVP intentionally has no login. Only documents indexed as PUBLIC are searchable.
+    const chunks = await retrieve(question, ["PUBLIC"]);
     const publicSources: Source[] = chunks.map(({ text: _text, ...source }) => source);
     const encoder = new TextEncoder();
 
@@ -133,9 +131,6 @@ export async function POST(request: Request) {
       },
     });
   } catch (error) {
-    if (error instanceof AuthError) {
-      return Response.json({ error: error.message }, { status: error.status });
-    }
     const message = error instanceof Error ? error.message : "요청 처리에 실패했습니다.";
     const missingIndex = message.includes("index") || message.includes("FAILED_PRECONDITION");
     return Response.json(
