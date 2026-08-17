@@ -80,28 +80,25 @@ export default function Home() {
 
   function submit(event: FormEvent) { event.preventDefault(); void ask(); }
 
-  return <main className="chatShell">
-    <aside className="chatIntro">
-      <div>
-        <span className="eyebrow">JOB RULES · AI ASSISTANT</span>
-        <h1>취업 규칙,<br />물어보세요.</h1>
-        <p>등록된 업무 문서를 바탕으로 핵심만 찾아 답변합니다.</p>
-      </div>
-      <div className="trustNote"><span className="statusDot" />문서 기반 답변<small>답변마다 참고한 규칙을 함께 보여드립니다.</small></div>
-    </aside>
+  return <main className="chatShell compactChat">
     <section className="chatPanel">
+      <header className="chatHeader"><span className="spark">✦</span><div><strong>취업 규칙 도우미</strong><small>등록된 문서에서 근거를 찾아 답변합니다.</small></div></header>
       {messages.length === 0 ? <div className="emptyState">
         <div className="spark">✦</div>
         <h2>무엇이 궁금하세요?</h2>
         <p>지원 기준, 제출 서류, 면접 규칙을 편하게 질문해 보세요.</p>
         <div className="starterGrid">{starters.map((starter) => <button key={starter} onClick={() => void ask(starter)}><span>{starter}</span> →</button>)}</div>
-      </div> : <div className="messageList">{messages.map((message) => <article className={`message ${message.role}`} key={message.id}>
+      </div> : <div className="messageList">{messages.map((message) => {
+        const citedNumbers = new Set([...message.content.matchAll(/\bS(\d+)\b/g)].map((match) => Number(match[1])));
+        const citedSources = message.sources?.filter((_, index) => citedNumbers.has(index + 1)) ?? [];
+        return <article className={`message ${message.role}`} key={message.id}>
         <div className="avatar">{message.role === "user" ? "나" : "AI"}</div>
         <div className="messageBody"><strong>{message.role === "user" ? "내 질문" : "취업 규칙 도우미"}</strong>
           <div className="messageText">{message.content || "답변을 준비하고 있어요…"}</div>
-          {message.role === "assistant" && message.sources && message.sources.length > 0 && <div className="sources"><span>참고한 규칙</span>{message.sources.map((source, index) => <div key={source.id}><b>S{index + 1}</b><span>{source.title}<small>{source.section}</small></span></div>)}</div>}
+          {message.role === "assistant" && citedSources.length > 0 && <div className="sources"><span>참고한 규칙</span><div className="sourceChips">{citedSources.map((source) => <span className="sourceChip" key={source.id}>{source.title} · {source.section}</span>)}</div></div>}
         </div>
-      </article>)}</div>}
+      </article>;
+      })}</div>}
       {error && <p className="inlineError">{error}</p>}
       <form className="composer" onSubmit={submit}>
         <textarea value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="예: 이력서 제출 기준을 알려줘" rows={1} disabled={isLoading} />

@@ -239,3 +239,22 @@ body { min-height: 100vh; background: radial-gradient(circle at 100% 0%, #eaf2ff
   .searchCard form button { min-width: 76px; padding: 0 12px; }.examples { overflow-x: auto; }
   .adminShell { padding: 36px 16px 54px; }
 }
+
+/* Compact chat: reserve the screen for the conversation, not the assistant chrome. */
+.compactChat { display: block; max-width: 920px; padding-top: 28px; }
+.compactChat .chatPanel { height: calc(100vh - 128px); min-height: 560px; }
+.chatHeader { display: flex; align-items: center; gap: 10px; padding: 15px 20px; border-bottom: 1px solid var(--line); }
+.chatHeader .spark { flex: 0 0 30px; width: 30px; height: 30px; margin: 0; border-radius: 9px; font-size: 14px; }
+.chatHeader strong, .chatHeader small { display: block; }
+.chatHeader strong { color: var(--navy); font-size: 13px; }
+.chatHeader small { margin-top: 2px; color: var(--muted); font-size: 11px; }
+.compactChat .emptyState { padding-top: 18px; }
+.sources { margin-top: 10px; gap: 5px; }
+.sources > span { font-size: 10px; }
+.sources .sourceChips { display: flex; flex-wrap: wrap; gap: 5px; padding: 0; border: 0; background: transparent; }
+.sourceChip { display: inline-flex; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 5px 8px; border: 1px solid #dbe5fb; border-radius: 999px; background: #f5f8ff; color: #5571a8; font-size: 10px; line-height: 1.2; }
+
+@media (max-width: 860px) {
+  .compactChat { padding: 16px 14px 28px; }
+  .compactChat .chatPanel { height: calc(100vh - 106px); min-height: 520px; }
+}
