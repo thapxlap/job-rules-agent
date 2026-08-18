@@ -57,3 +57,7 @@ env:
     availability:
       - BUILD
       - RUNTIME
+  - variable: MANAGEMENT_PASSWORD_SHA256
+    secret: management-password-sha256
+    availability:
+      - RUNTIME

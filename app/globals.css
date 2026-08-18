@@ -141,6 +141,12 @@ a { color: inherit; text-decoration: none; }
 .status-active { background: #e4f8f1; color: var(--green); }
 .status-failed { background: #fff0ef; color: var(--red); }
 .status-parsing, .status-embedding, .status-indexing { background: var(--blue-soft); color: var(--blue); }
+.deleteButton { display: block; margin: 8px 0 0 auto; padding: 5px 9px; border: 1px solid #f2c5cb; border-radius: 7px; background: #fff; color: var(--red); font-size: 11px; font-weight: 700; cursor: pointer; }
+.deleteButton:hover:not(:disabled) { background: #fff4f5; }.deleteButton:disabled { opacity: .55; cursor: default; }
+.deletionNote { margin: 13px 2px 0; color: var(--muted); font-size: 11px; }
+.managementGate { max-width: 460px; padding: 25px; border: 1px solid var(--line); border-radius: 15px; background: #fff; box-shadow: 0 7px 22px rgba(31,43,67,.05); }
+.managementGate h2 { margin: 0; font-size: 18px; color: var(--navy); }.managementGate p { color: var(--muted); font-size: 13px; }
+.managementGate form { display: flex; gap: 9px; }.managementGate input { min-width: 0; flex: 1; padding: 10px 12px; border: 1px solid #dce2eb; border-radius: 9px; outline: none; }.managementGate input:focus { border-color: #7fa8ff; box-shadow: 0 0 0 4px #edf3ff; }.managementGate .primaryButton { width: auto; }
 .muted { color: var(--muted); font-size: 13px; }
 
 @media (max-width: 860px) {
